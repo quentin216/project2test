@@ -32,8 +32,13 @@ void StudentList::printStudentByID(int anID, double aTuitionRate) const {
     Node* current = first;
     bool flag = false;
     while (current != nullptr && !flag) {
-        flag = (current->getData().getID() != anID);
-        current = first->getNext();
+        flag = (current->getData().getID() == anID);
+        //  Student me = current->getData();
+        //  cout << me.getFirstName() << " " << me.getID() << " " << flag << endl;
+        if (!flag) {
+            current = current->getNext();
+        }
+
     }
     if (flag) {
         current->getData().printStudentInfo(aTuitionRate);
@@ -46,9 +51,10 @@ void StudentList::printStudentByID(int anID, double aTuitionRate) const {
 void StudentList::printStudentByName(const std::string& aLastName) const {
     Node* current = first;
     bool flag = false;
-    while (current != nullptr) {
+    while (current != nullptr && !flag) {
         flag = (current->getData().getLastName() == aLastName);
-        current = current->getNext();
+        if (!flag)
+            current = current->getNext();
     }
     if (flag) {
         current->getData().printStudent();

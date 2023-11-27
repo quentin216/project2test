@@ -1,30 +1,29 @@
 /*
     Chen, Quentin (team leader)
-    Espejo, Alex
+    Espejo, Alexander
     Foroutan, Pantea
 
     Project: Grade Report
     CS A250
     Fall 2023
 */
-
 #include "Student.h"
 #include <iostream>
 #include <map>
-
+#include <iomanip>
 using namespace std;
 
-void Student::setStudent(const Student& newStudent)
+void Student::setStudent(const Student& aStudent)
 {
-    studentID = newStudent.studentID;
-    firstName = newStudent.firstName;
-    lastName = newStudent.lastName;
-    numberOfCourses = newStudent.numberOfCourses;
-    tuitionWasPaid = newStudent.tuitionWasPaid;
-    coursesCompleted = newStudent.coursesCompleted;
+    studentID = aStudent.studentID;
+    firstName = aStudent.firstName;
+    lastName = aStudent.lastName;
+    numberOfCourses = aStudent.numberOfCourses;
+    tuitionWasPaid = aStudent.tuitionWasPaid;
+    coursesCompleted = aStudent.coursesCompleted;
 }
 
-void Student::setStudentInfo(int newID, const string& newFirstName, const string& newLastName,
+void Student::setStudentInfo(int newID, const std::string& newFirstName, const std::string& newLastName,
     bool paid, const std::multimap<Course, char>& courses)
 {
     studentID = newID;
@@ -83,7 +82,7 @@ bool Student::isTuitionPaid() const
     return tuitionWasPaid;
 }
 
-bool Student::isCourseCompleted(const string& prefix, int courseNumber) const
+bool Student::isCourseCompleted(const std::string& prefix, int courseNumber) const
 {
     if (numberOfCourses == 0)
     {
@@ -123,7 +122,8 @@ double Student::calculateGPA() const
         case 'F': grade = 0.0;
             break;
         }
-        totalPoints += grade;
+
+        totalPoints += grade * (*iter).first.getCourseUnits();
         totalUnits += (*iter).first.getCourseUnits();
         iter++;
     }
@@ -146,15 +146,15 @@ void Student::printStudentInfo(double tuitionRate)
     cout << "Student ID: " << studentID << endl;
     cout << "Number of courses completed: " << numberOfCourses << endl;
     cout << endl;
-    cout << "CourseNo   Units   Grade" << endl;
+    cout << setw(5) << "CourseNo" << setw(7) << " Units" << setw(8) << "Grade" << endl;
     int totalCreditHours = 0;
     for (auto iter = coursesCompleted.begin();
         iter != coursesCompleted.end(); iter++)
     {
-        cout << (*iter).first.getCoursePrefix() << " "
-            << (*iter).first.getCourseNumber() << "  "
-            << (*iter).first.getCourseUnits() << "  "
-            << (*iter).second << endl;
+        cout << setw(4) << (*iter).first.getCoursePrefix() << " "
+            << (*iter).first.getCourseNumber()
+            << setw(7) << (*iter).first.getCourseUnits()
+            << setw(6) << (*iter).second << endl;
         totalCreditHours += (*iter).first.getCourseUnits();
     }
     cout << endl;

@@ -20,6 +20,9 @@ class Student
 public:
 	Student() : studentID(0), firstName("N/A"), lastName("N/A"), 
 		numberOfCourses(0), tuitionWasPaid(false) {}
+	Student(int newID, const std::string& newFirstName,
+		const std::string& newLastName, bool paid, const std::multimap<Course, char>& courses) : studentID(newID), firstName(newFirstName), lastName(newLastName),
+		numberOfCourses(static_cast<int>(courses.size())), tuitionWasPaid(paid), coursesCompleted(courses) {}
 	
 	void setStudent(const Student& newStudent);
 	void setStudentInfo(int newID, const std::string& newFirstName, const std::string& newLastName, bool paid, const std::multimap<Course, char>& courses);
