@@ -16,7 +16,11 @@
 class Course
 {
 public:
-	Course() : coursePrefix("N/A"), courseNumber(0), courseUnits(0) {}
+	Course() : coursePrefix("N/A"), courseNumber(0), 
+		courseUnits(0) {}
+	/* Course(const std::string& prefix, int courseNum, 
+	int numOfUnits) : coursePrefix(prefix), 
+	courseNumber(courseNum), courseUnits(numOfUnits) {} */
 
 	void setCourseInfo(const std::string& newCoursePrefix, int newCourseNumber, int newCourseUnits);
 	
@@ -26,8 +30,6 @@ public:
 	bool operator<(const Course& other) const;
 
 	~Course() {}
-
-
 
 private:
 	std::string coursePrefix;

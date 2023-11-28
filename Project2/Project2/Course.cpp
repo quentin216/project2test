@@ -14,7 +14,8 @@
 
 using namespace std;
 
-void Course::setCourseInfo(const string& newCoursePrefix, int newCourseNumber, int newCourseUnits)
+void Course::setCourseInfo(const string& newCoursePrefix, 
+	int newCourseNumber, int newCourseUnits)
 {
 	coursePrefix = newCoursePrefix;
 	courseNumber = newCourseNumber;
